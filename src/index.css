@@ -61,3 +61,8 @@ code {
   flex-direction: column;
   text-align: center;
 }
+
+.shopping-list {
+  font-family: "Starnight", sans-serif;
+  padding: 140px 0px 100px 120px;
+}

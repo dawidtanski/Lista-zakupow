@@ -20,13 +20,31 @@ function Header() {
       <div className="header-text">
         <h1>Lista zakupów</h1>
         <h3>
-          Przygotuj się na zakupy z moją aplikacją - nie zapomnisz niczego!
+          Przygotuj się na zakupy z moją aplikacją - nie zapomnisz niczego !
         </h3>
       </div>
     </div>
   );
 }
 
+function Button({ children, onClick }) {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
 function ShoppingList() {
-  <ul></ul>;
+  const [list, setList] = useState([]);
+
+  return (
+    <div className="shopping-list">
+      <ul>
+        <li>sdas</li>
+        <li>dsdas</li>
+        <li>sdsd</li>
+      </ul>
+    </div>
+  );
 }
