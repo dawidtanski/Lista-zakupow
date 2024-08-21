@@ -47,9 +47,33 @@ const initialItems = [
 
 export default function App() {
   const [productsList, setProductsList] = useState([]);
+  const [newProductName, setNewProductName] = useState("");
+  const [showInput, setShowInput] = useState(false);
 
   function handleAddProduct(newProduct) {
-    setProductsList((newProduct) => [...productsList, newProduct]);
+    setProductsList((productsList) => [...productsList, newProduct]);
+  }
+
+  function handleShowInput() {
+    setShowInput(true);
+  }
+
+  function handleProductNameChange(event) {
+    setNewProductName(event.target.value);
+  }
+
+  function handleProductSubmit() {
+    if (newProductName.trim() !== "") {
+      handleAddProduct(newProductName);
+      setNewProductName("");
+      setShowInput(false);
+    }
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      handleProductSubmit();
+    }
   }
 
   return (
@@ -58,7 +82,19 @@ export default function App() {
       <div className="shopping-app">
         <div className="sidebar">
           <ShoppingList productsList={productsList} />
-          <Button onClick={handleAddProduct}>Dodaj produkt</Button>
+          <Button onClick={handleShowInput}>Dodaj produkt</Button>
+          {showInput && (
+            <div className="input-container">
+              <input
+                type="text"
+                value={newProductName}
+                onChange={handleProductNameChange}
+                placeholder="Wpisz nazwę produktu"
+                onKeyDown={handleKeyPress}
+              ></input>
+              <Button onClick={handleProductSubmit}>Zapisz</Button>
+            </div>
+          )}
         </div>
         <HelperList onAddProduct={handleAddProduct} />
       </div>
@@ -88,24 +124,45 @@ function Button({ children, onClick }) {
   );
 }
 
-function ShoppingList() {
+function ShoppingList({ productsList }) {
   return (
     <div className="shopping-list">
       <ol>
         <li>Woda</li>
         <li>maslo klarowane</li>
         <li>olej rzepakowy</li>
+        {productsList.map((product) => (
+          <li key={product}>{product}</li>
+        ))}
       </ol>
     </div>
   );
 }
 
 function HelperList({ onAddProduct }) {
+  const [clickedItems, setClickedItems] = useState({});
+
+  function handleItemClick(item) {
+    if (!clickedItems[item]) onAddProduct(item);
+
+    setClickedItems((ClickedItems) => ({
+      ...ClickedItems,
+      [item]: true,
+    }));
+  }
+
   return (
     <ul className="helper-list">
       {initialItems.map((item) => (
-        <li key={item} onClick={() => onAddProduct(item)}>
-          {item}
+        <li
+          key={item}
+          onClick={() => handleItemClick(item)}
+          className={`helper-item ${clickedItems[item] ? "flipped" : ""}`}
+        >
+          <div className="helper-item-content">
+            <div className="helper-item-front">{item}</div>
+            <div className="helper-item-back"></div>
+          </div>
         </li>
       ))}
     </ul>
