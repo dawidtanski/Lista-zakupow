@@ -32,6 +32,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 80px;
 }
 
 .header h1 {
@@ -62,7 +63,73 @@ code {
   text-align: center;
 }
 
+.shopping-app {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+
 .shopping-list {
+  display: flex;
   font-family: "Starnight", sans-serif;
   padding: 140px 0px 100px 120px;
+}
+
+.button {
+  background-color: #635050;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 7px 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.button:hover {
+  background-color: #a26363;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.helper-list {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 45%;
+}
+
+ul.helper-list {
+  padding-left: 100px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  height: 80px;
+}
+
+ul.helper-list li {
+  background-color: #e0be33;
+  color: #635050;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  font-family: "Starnight", sans-serif;
+  text-align: center;
+}
+
+ul.helper-list li:hover {
+  background-color: #ffeda7;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
